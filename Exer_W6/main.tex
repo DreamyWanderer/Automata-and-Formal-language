@@ -13,6 +13,7 @@
 \usetikzlibrary {automata, positioning, arrows}
 
 \usepackage{amsmath, amssymb}
+\usepackage{cases}
 \usepackage{bm}
 
 \newcommand{\fDFA}[3]{
@@ -91,6 +92,54 @@
 	\begin{itemize}
 		
 		\item[ \textbf{Bài 5} ]
+		
+		\item[ \textbf{Bài 6} ]
+		
+		\begin{itemize}
+		
+			\item[a.] Hệ phương trình là:
+		
+				\begin{numcases}{}
+				\bm{ x_0 = bx_0 + ax_1 }\\
+				\bm{ x_1 = (a + b)x_2 }\\
+				\bm{ x_2 = \varepsilon + (a + b)x_1 }
+				\end{numcases}		
+				
+				Áp dụng định lý, và thế giá trị $x_1$ vào (3), ta có:
+				
+				\begin{align*}
+				\bm{ x_2 = \varepsilon + (a + b)(a + b)x_2 = ((a + b)(a + b))^* }
+				\end{align*}
+				
+				Thế giá trị $x_2$ vào (2):
+				
+				\begin{align*}
+				\bm{ x_1 = (a + b)((a + b)(a + b))^* }
+				\end{align*}
+				
+				Thế giá trị $x_1, x_2$ vào (1):
+				
+				\begin{align*}
+				\bm{ x_0 = bx_0 + a(a + b)((a + b)(a + b))^*  = b^*a(a + b)((a + b)(a + b))^*}
+				\end{align*}
+				
+				\bm{$x_0$} chính là biểu thức chính quy cần tìm vì $q_0$ là trạng thái bắt đầu.
+				
+			\item[b.] Hệ phương trình là:
+			
+				\begin{numcases}{}
+				\bm{ x_0 = ax_0 + ax_1 }\\
+				\bm{ x_1 = bx_0 + bx_1 + ax_2 }\\
+				\bm{ x_2 = \varepsilon + ax_1 }
+				\end{numcases}
+				
+				Thế giá trị $x_2$ vào (5):
+				
+				\begin{align*}
+				\bm{ x_1 = bx_0 + bx_1 + aax_1}
+				\end{align*}
+		
+		\end{itemize}
 	
 	\end{itemize}
 	
