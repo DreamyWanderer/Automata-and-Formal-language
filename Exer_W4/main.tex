@@ -1,0 +1,169 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{fancyhdr, url}
+\usepackage{ragged2e}
+\usepackage[pdftex]{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage[vietnamese]{babel}
+\usepackage{pgffor}
+\usepackage{ifthen}
+\usepackage{listofitems}
+
+\usepackage{tikz}
+\usetikzlibrary {automata, positioning, arrows}
+
+\newcommand{\fDFA}[3]{
+	\delta_D(\{
+	\foreach[count=\i] \j in {#1} {
+		\ifthenelse{\i < #2}{s_\j, }{s_\j} 
+	}
+	\}, #3)
+}
+
+\newcommand{\fNFA}[2]{
+	\delta_N(s_{#1}, #2)
+}
+
+\newcommand{\convNFAtoDFA}[5]{
+	$\fDFA{#1}{#2}{#3} = 
+	\foreach[count=\i] \j in {#1} {
+		\fNFA{\j}{#3}
+		\ifthenelse{\i < #2}{\cup}{}
+	} = \{
+	\foreach[count=\i] \j in {#4} {
+		\ifthenelse{\i < #5}{s_\j, }{s_\j}
+	}\}$
+}
+
+\newcommand{\epsCLOSE}[1]{
+	\varepsilon\text{CLOSE}\left(\ #1 \ \right)
+}
+
+\newcommand{\convEpsNFAtoDFA}[7]{
+	$\fDFA{#1}{#2}{#3} = \\
+	\epsCLOSE{
+	\foreach[count=\i] \j in {#1} {
+		\fNFA{\j}{#3}
+		\ifthenelse{\i < #2}{\cup}{}
+	}} =
+	\epsCLOSE{
+	\{
+	\foreach[count=\i] \j in {#4} {
+		\ifthenelse{\i < #5}{s_\j, }{s_\j}
+	} \}
+	} = 
+	\{
+	\foreach[count=\i] \j in {#6} {
+		\ifthenelse{\i < #7}{s_\j, }{s_\j}
+	}
+	\}$
+}
+
+\begin{document}
+	
+	\pagenumbering{gobble}
+
+	\begin{titlepage}
+		\centering
+		\large
+		ĐẠI HỌC KHOA HỌC TỰ NHIÊN, ĐẠI HỌC QUỐC GIA TP.HCM\\[.1in]
+		KHOA CÔNG NGHỆ THÔNG TIN\\BỘ MÔN KHOA HỌC MÁY TÍNH\\
+		\vfill
+		\huge AUTOMATA VÀ\\NGÔN NGỮ HÌNH THỨC\\[.1in]
+		\LARGE BÀI TẬP CHƯƠNG 2 - PHẦN 2\\
+		\vfill
+		\RaggedRight
+		\large
+		Sinh viên thực hiện: Nguyễn Thế Hoàng (MSSV: 2012 0090)\\[.1in]
+		Giáo viên phụ trách: Nguyễn Thanh Phương - Lê Ngọc Thành\\[.2in]
+		\Centering
+		BÀI TẬP MÔN HỌC - AUTOMATA VÀ NGÔN NGỮ HÌNH THỨC\\[.1in]
+		HỌC KỲ II - NĂM HỌC 2022 - 2023
+	\end{titlepage}
+	
+	\newpage	
+	
+	\pagenumbering{arabic}
+	
+	\begin{itemize}
+		
+		\item[ \textbf{Bài 2} ]
+		
+		\begin{itemize}
+			
+			\item[a.] $\mathcal{L} = \{ xaaba: x \in \{a, b\}^* \}$
+		
+			\input{./Tikz/pic_2_a}
+			\bigskip
+			
+			\item[b.] $\mathcal{L} = \{ 11x00y: x,y \in \{0,1\}^* \}$
+			
+			\input{./Tikz/pic_2_b}
+			
+			\item[c.] $\mathcal{L} = \{ w \in \{0,1\}^*: 101 \in w \wedge 010 \in w \}$
+			
+			\input{./Tikz/pic_2_c}
+			
+		\end{itemize}
+		
+		\item[ \textbf{Bài 3} ]
+		
+		\begin{itemize}
+		
+			\item[a.] Ban đầu DFA chỉ chứa trạng thái bắt đầu $s_1$
+			\input{./ConvertNFAtoDFA/3_a}				
+			
+			\item[b.] Ban đầu DFA chỉ chứa trạng thái bắt đầu $s_1$
+			\input{./ConvertNFAtoDFA/3_b}
+		
+		\end{itemize}				
+		
+		\item[ \textbf{Bài 4} ]
+			
+		\begin{itemize}
+			
+			\item[a.] $\mathcal{L} = \{ (01)^n \vee (010)^m: n,m \in \mathbb{Z}^+ \}$	
+			
+			\input{./Tikz/pic_4_a}
+			
+			\item[d.] $\mathcal{L} = \{ x1y: x,y \in \{0,1\}^* \wedge |y| = 4 \}$
+			
+			\input{./Tikz/pic_4_d}
+			
+			\item[f.] $\mathcal{L} = \{ abab^n \vee aba^n: n \in \mathbb{N} \}$
+			
+			\input{./Tikz/pic_4_f}
+			
+		\end{itemize}							
+	
+		\item[ \textbf{Bài 5} ]	
+		
+		\begin{itemize}
+		
+			\item[a.] Ban đầu $\epsCLOSE{s_0} = \{s_0, s_1, s_3\}$. Các hàm chuyển từ trạng thái DFA chỉ chứa một trạng thái từ NFA mà có kết quả là rỗng sẽ được lược bỏ trong các bước dưới đây.
+			
+			\input{./ConvertNFAtoDFA/5_a}
+		
+		\end{itemize}
+	
+		\item[ \textbf{Bài 6} ]
+		
+		\begin{itemize}
+			
+			\item[a.] Ban đầu $\epsCLOSE{s_0} = \{s_0, s_1, s_2\}$. Các hàm chuyển từ trạng thái DFA chỉ chứa một trạng thái từ NFA mà có kết quả là rỗng sẽ được lược bỏ trong các bước dưới đây. Do sự đồng bộ các kí hiệu trạng thái trong suốt văn bản này và việc điều chỉnh lại kí hiệu trong hàm định nghĩa mới của Latex sẽ rất cồng kềnh nên mọi trạng thái trong Bài 6 này sẽ được chuyển từ $q_i$ thành $s_i$, mà không mất tính tổng quát.
+			\input{./ConvertNFAtoDFA/6_a}
+			
+			\item[b.] Ban đầu $\epsCLOSE{s_0} = \{s_0\}$.
+			\input{./ConvertNFAtoDFA/6_b}
+			
+			\item[c.] Ban đầu $\epsCLOSE{s_0} = \{s_0\}$.
+			\input{./ConvertNFAtoDFA/6_c}
+			
+			\item[d.] Ban đầu $\epsCLOSE{s_0} = \{s_0, s_2\}^*$.
+			\input{./ConvertNFAtoDFA/6_d}
+			
+		\end{itemize}			
+	
+	\end{itemize}
+	
+\end{document}

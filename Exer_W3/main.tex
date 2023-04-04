@@ -1,0 +1,232 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{fancyhdr, url}
+\usepackage{ragged2e}
+\usepackage[pdftex]{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage[vietnamese]{babel}
+\usepackage{tikz}
+\usetikzlibrary {automata, positioning, arrows}
+
+\begin{document}
+	
+	\pagenumbering{gobble}
+
+	\begin{titlepage}
+		\centering
+		\large
+		ĐẠI HỌC KHOA HỌC TỰ NHIÊN, ĐẠI HỌC QUỐC GIA TP.HCM\\[.1in]
+		KHOA CÔNG NGHỆ THÔNG TIN\\BỘ MÔN KHOA HỌC MÁY TÍNH\\
+		\vfill
+		\huge AUTOMATA VÀ\\NGÔN NGỮ HÌNH THỨC\\[.1in]
+		\LARGE BÀI TẬP CHƯƠNG 2\\
+		\vfill
+		\RaggedRight
+		\large
+		Sinh viên thực hiện: Nguyễn Thế Hoàng (MSSV: 2012 0090)\\[.1in]
+		Giáo viên phụ trách: Nguyễn Thanh Phương - Lê Ngọc Thành\\[.2in]
+		\Centering
+		BÀI TẬP MÔN HỌC - AUTOMATA VÀ NGÔN NGỮ HÌNH THỨC\\[.1in]
+		HỌC KỲ II - NĂM HỌC 2022 - 2023
+	\end{titlepage}
+	
+	\newpage	
+	
+	\pagenumbering{arabic}
+	
+	\begin{itemize}
+		
+		\item[ \textbf{Bài 1} ]
+		
+		\begin{itemize}
+		
+			\item[a.] $\mathcal{L} = \{w \in \{0, 1\}^*: 000 \in w\}$
+			
+			\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto]
+			
+			
+				\node[state, initial](s_1){$s_1$};
+				\node[state, right=of s_1](s_2){$s_2$};
+				\node[state, right=of s_2](s_3){$s_3$};
+				\node[state, accepting, right=of s_3](s_4){$s_4$};
+				\path[->]	(s_1) edge[bend left] node{0} (s_2)
+				edge[loop above] node{1} ()
+				(s_2) edge[bend left] node{0} (s_3)
+				edge[bend left] node{1} (s_1)
+				(s_3) edge node{0} (s_4)
+				edge[bend left=2cm] node{1} (s_1)
+				(s_4) edge[loop above] node{0, 1} ();
+			
+			\end{tikzpicture}
+			
+			\bigskip
+			
+			\item[b.] $\mathcal{L} = \{ab^2wb^2: w \in \{a, b\}^*\}$
+			
+			\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto]
+			
+			
+				\node[state, initial](s_1){$s_1$};
+				\node[state, right=of s_1](s_2){$s_2$};
+				\node[state, right=of s_2](s_3){$s_3$};
+				\node[state, right=of s_3](s_4){$s_4$};
+				\node[state, right=of s_4](s_5){$s_5$};
+				\node[state, accepting, right=of s_5](s_6){$s_6$};
+				
+				\path[->] (s_1) edge node{a} (s_2)
+				(s_2) edge node{b} (s_3)
+				(s_3) edge node{b} (s_4)
+				(s_4) edge[loop] node{a} ()
+				edge node{b} (s_5)
+				(s_5) edge[bend left] node{a} (s_4)
+				edge node{b} (s_6)
+				(s_6) edge[loop] node{b} ()
+				edge[bend left=2cm, ] node{a} (s_4);
+			
+			\end{tikzpicture}
+			
+		\bigskip
+		
+			\item[c.] $\mathcal{L} = \{w \in \{a, b\}^*: |w| \equiv_3 0\}$
+		
+			\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto]
+			
+				\node [state, accepting, initial] (s_1) {$s_1$};
+				\node [state, right of=s_1] (s_2) {$s_2$};
+				\node [state, right of=s_2] (s_3) {$s_3$};
+				
+				\path[->] (s_1) edge node{a, b} (s_2)
+				(s_2) edge node{a, b} (s_3)
+				(s_3) edge[bend right=2cm, above] node{a, b} (s_1);
+			
+			\end{tikzpicture}
+			
+			\bigskip
+			
+			\item[d.] $\mathcal{L} = \{ w \in \{a, b\}^*: aa \notin w \}$
+			
+			Chúng ta xây dựng DFA cho trường hợp $\mathcal{L} = \{ w \in \{a, b\}^*: aa \in w \}$, sau đó chuyển các trạng thái không chấp nhận thành trạng thái chấp nhận, và ngược lại. DFA phía trước là kết quả sau cùng sau khi thực hiện quy trình đảo ngược này.
+		
+			\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto]
+			
+				\node[state, initial, accepting] (s_1) {$s_1$};
+				\node[state, accepting, right of=s_1] (s_2) {$s_2$};
+				\node[state, right of=s_2] (s_3) {$s_3$};
+				\path[->] (s_1) edge node{a} (s_2)
+				edge[loop] node{b} ()
+				(s_2) edge node{a} (s_3)
+				edge[bend left] node{b} (s_1)
+				(s_3) edge[loop] node{a, b} ();
+			
+			\end{tikzpicture}
+			
+			\bigskip
+			
+			\item[g.] $\mathcal{L} = \{ w \in \{0, 1\}^*: |w|_0 \leq 3 \}$
+		
+			\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto]
+			
+				\node[state, accepting, initial] (s_1) {$s_1$};
+				\node[state, accepting, right of=s_1] (s_2) {$s_2$};
+				\node[state, accepting, right of=s_2] (s_3) {$s_3$};
+				\node[state, accepting, right of=s_3] (s_4) {$s_4$};
+				\node[state, right of=s_4] (s_5) {$s_5$};
+				\path[->] (s_1) edge node{0} (s_2)
+				(s_2) edge node{0} (s_3)
+				(s_3) edge node{0} (s_4)
+				(s_4) edge node{0} (s_5)
+				(s_1) edge[loop] node{1} ()
+				(s_2) edge[loop] node{1} ()
+				(s_3) edge[loop] node{1} ()							(s_4) edge[loop] node{1} ();
+				
+			\end{tikzpicture}
+			
+			\bigskip
+			
+			\item[h.] $\mathcal{L} = \{ w \in \{0, 1\}^*: |w|_0 > 0 \wedge |w|_1 = 2 \}$
+			
+			Các trạng thái $s_1, s_2, s_3$ dùng để ghi nhớ việc đã đọc được lần lượt 0, 1, 2 kí tự $1$ nhưng chưa từng đọc được kí tự $0$. Ngay khi DFA đọc được kí tự $0$ trong chuỗi ban đầu, trạng thái sẽ ngay lập tức chuyển thành một trong các trạng thái $s_4, s_5, s_6$, tùy thuộc vào số lượng kí tự $1$ đã đọc được. Trạng thái chấp nhận $s_6$ chỉ đạt được khi đã được được kí tự $0$ và có đúng 2 kí tự $1$ để đến được $s_6$ và không bị rơi vào trạng thái bẫy.
+			
+			\begin{tikzpicture}[shorten >=1pt,node distance=2cm,on grid,auto]
+			
+				\node[state, initial] (s_1) {$s_1$};
+				\node[state, right of=s_1] (s_2) {$s_2$};
+				\node[state, right of=s_2] (s_3) {$s_3$};
+				\node[state, below of=s_1] (s_4) {$s_4$};
+				\node[state, below of=s_2] (s_5) {$s_5$};
+				\node[state, accepting, below of=s_3] (s_6) {$s_6$};
+				\path[->] (s_1) edge node{1} (s_2)
+				edge node{0} (s_4)
+				(s_2) edge node{1} (s_3)
+				edge node{0} (s_5)
+				(s_3) edge node{0} (s_6)
+				(s_4) edge[loop below] node{0} ()
+				edge node{1} (s_5)
+				(s_5) edge[loop below] node{0} ()
+				edge node{1} (s_6)
+				(s_6) edge[loop below] node{0} ();
+			
+			\end{tikzpicture}
+			
+			\bigskip			
+			
+			\item[l.] $\mathcal{L} = \{ w \in \{0, 1, 2, 3\}^*: (|w|_1 + 2|w|_2 + 3|w|_3) \equiv_4 0 \}$
+			
+			Mỗi trạng thái $s_i$ cho biết sau khi đã đọc kí tự hiện tại nào đó của chuỗi ban đầu, tính tới hiện tại $|w|_1 + 2|w|_2 + 3|w|_3$ có số dư là $(i-1)$ khi chia cho 4. Tại mỗi trạng thái $s_i$, để xác định trạng thái cần chuyển tới tiếp theo, ta thấy: mỗi kí tự 2 đọc được tương đương cộng 2 vào $(i-1)$, mỗi kí tự 3 đọc được tương đương cộng 3 vào $(i-1)$; tiếp đó chia lấy dư cho 4 ta đi tới trạng thái kế tiếp phù hợp.
+			
+			\begin{tikzpicture}[shorten >=1pt,node distance=3cm,on grid,auto]
+			
+				\node[state, initial, accepting] (s_1) {$s_1$};
+				\node[state, right of=s_1] (s_2) {$s_2$};
+				\node[state, right of=s_2] (s_3) {$s_3$};
+				\node[state, right of=s_3] (s_4) {$s_4$};
+				\path[->] (s_1) edge node{1} (s_2)
+				edge[bend right, below] node{2} (s_3)
+				edge[bend right=3cm, below] node{3} (s_4)
+				edge[loop below] node{0} ()
+				(s_2) edge node{1} (s_3)
+				edge[bend right=2cm] node{2} (s_4)
+				edge[bend right=2cm, above] node{3} (s_1)
+				edge[loop above] node{0} ()
+				(s_3) edge node{1} (s_4)
+				edge[bend right=3cm, above] node{2} (s_1)
+				edge[bend right=2cm, above] node{3} (s_2)
+				edge[loop above] node{0} ()
+				(s_4) edge[bend right=4cm, above] node{1} (s_1)
+				edge[bend right=3cm, above] node{2} (s_2)
+				edge[bend right=2cm, above] node{3} (s_3)
+				edge[loop right] node{0} ();
+			
+			\end{tikzpicture}
+					
+			\bigskip
+			
+			\item[k.] $\mathcal{L}$ là tập hợp các chuỗi nhị phân mã hóa số nguyên chia hết cho 5.
+			
+			Trạng thái $s_i$ cho biết số nguyên được mã hóa bởi chuỗi nhị phân đọc đến hiện tại có số dư là $i-1$ khi chia cho 5. Tại mỗi trạng thái $s_i$, ta xác định trạng thái tiếp theo hiện tại bằng cách: giả sử số nguyên cho tới hiện tại là $n$, khi đọc kí tự nhị phân tiếp theo thì số nguyên mới $n' = n * 2 + (\text{0 hoặc 1})$. $n$ và $n'$ luôn được chia lấy phần dư cho 5, do đó trạng thái  mới sẽ là $s_i$ với $i = (n' \text{mod} 5) + 1$.
+			
+			\begin{tikzpicture}[shorten >=1pt,node distance=3cm,on grid,auto]
+			
+				\node[state, initial, accepting] (s_1) {$s_1$};
+				\node[state, right of=s_1] (s_2) {$s_2$};
+				\node[state, right of=s_2] (s_3) {$s_3$};
+				\node[state, right of=s_3] (s_4) {$s_4$};
+				\node[state, right of=s_4] (s_5) {$s_5$};
+				\path[->] (s_1) edge[loop] node{0} ()
+				edge node{1} (s_2)
+				(s_2) edge node{0} (s_3)
+				edge[bend left] node{1} (s_4)
+				(s_3) edge[bend left] node{0} (s_5)
+				edge[bend right, above] node{1} (s_1)
+				(s_4) edge[bend right=2cm, above] node{0} (s_2)
+				edge[bend left] node{1} (s_3)
+				(s_5) edge[bend left] node{0} (s_4)
+				edge[loop] node{1} ();
+			
+			\end{tikzpicture}
+			
+		\end{itemize}
+	
+	\end{itemize}
+	
+\end{document}

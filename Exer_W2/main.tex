@@ -1,0 +1,120 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage{amsmath, amssymb}
+\usepackage{fancyhdr, url}
+\usepackage{ragged2e}
+\usepackage[pdftex]{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage[vietnamese]{babel}
+
+\begin{document}
+	
+	\pagenumbering{gobble}
+
+	\begin{titlepage}
+		\centering
+		\large
+		ĐẠI HỌC KHOA HỌC TỰ NHIÊN, ĐẠI HỌC QUỐC GIA TP.HCM\\[.1in]
+		KHOA CÔNG NGHỆ THÔNG TIN\\BỘ MÔN KHOA HỌC MÁY TÍNH\\
+		\vfill
+		\huge AUTOMATA VÀ\\NGÔN NGỮ HÌNH THỨC\\[.1in]
+		\LARGE BÀI TẬP CHƯƠNG 1\\
+		\vfill
+		\RaggedRight
+		\large
+		Sinh viên thực hiện: Nguyễn Thế Hoàng (MSSV: 2012 0090)\\[.1in]
+		Giáo viên phụ trách: Nguyễn Thanh Phương - Lê Ngọc Thành\\[.2in]
+		\Centering
+		BÀI TẬP MÔN HỌC - AUTOMATA VÀ NGÔN NGỮ HÌNH THỨC\\[.1in]
+		HỌC KỲ II - NĂM HỌC 2022 - 2023
+	\end{titlepage}
+	
+	\newpage	
+	
+	\pagenumbering{arabic}
+	
+	\begin{itemize}
+		
+		\item[ \textbf{Bài 1} ]
+		
+		\begin{itemize}
+			
+			\item[a.] $\bigcup_{i=1}^n A_i = A_1 \cup A_2 \cup A_3 \cup \ldots = \{1\} \cup \{1, 2\} \cup \{1, 2, 3\} \cup \ldots = \mathbb{Z}^+$	
+			\item[b.] $\bigcap_{i=1}^n A_i = A_1 \cap A_2 \cap A_3 \cap \ldots = \{1\} \cap \{1, 2\} \cap \{1, 2, 3\} \cap \ldots = \{1\}$			
+			
+		\end{itemize}
+		
+		\item[ \textbf{Bài 5} ]
+		
+			\textit{Chứng minh:} Gọi $S(n)$ là phát biểu rằng, $\forall n \in \mathbb{N}$: \[\sum_{i=1}^n \dfrac{1}{i(i+1)} = \dfrac{n}{n+1}\]
+			\textit{Bước cơ sở:} Cho $n_0=0$. Rõ ràng, $S(0)$ là đúng khi $\sum_{i=1}^0 \dfrac{1}{i(i+1)} = \dfrac{0}{0 + 1} = 0$ .
+			\textit{Bước qui nạp:} Giả thiết qui nạp cho rằng $S(k)$ đúng với giá trị $k \in \mathbb{N}$ tùy ý và $k \geq n_0$. Nghĩa là: \[\sum_{i=1}^k \dfrac{1}{i(i+1)} = \dfrac{k}{k+1}\]
+			Chứng minh rằng: \[\sum_{i=1}^{k+1} \dfrac{1}{i(i+1)} = \dfrac{k+1}{k+2}\]
+			Đi từ vế trái và dựa vào giả thiết qui nạp, ta có: 
+			
+			\begin{equation*}
+			\begin{split}
+				\sum_{i=1}^{k+1} \dfrac{1}{i(i+1)} & = \sum_{i=1}^k \dfrac{1}{i(i+1)} + \dfrac{1}{(k+1)(k+2)} = \dfrac{k}{k+1} + \dfrac{1}{(k+1)(k+2)} \\ & = \dfrac{k(k+2) + 1}{(k+1)(k+2)} = \dfrac{k^2 + 2k + 1}{(k+1)(k+2)} = \dfrac{(k+1)^2}{(k+1)(k+2)} \\ & = \dfrac{k+1}{k+2}
+			\end{split}	
+			\end{equation*}
+		
+			Từ đây có thể khẳng định, phát biểu $S(n)$ đúng $\forall n \in \mathbb{N}$.
+	
+		\item[ \textbf{Bài 12} ] 10 chuỗi đầu tiên theo thứ tự chuẩn tắc của ngôn ngữ $\mathcal{L}$:
+		
+			\begin{equation*}
+				\mathcal{L} = \{w \in \{a,b\}^* : |w| \equiv_{3} 0 \} = \{ \varepsilon, aaa, aab, aba, abb, baa, bab, bba, bbb, aaaaaa \}
+			\end{equation*}
+			
+		\item[ \textbf{Bài 13} ]
+		
+			\begin{itemize}
+				
+				\item[a.] $\mathcal{L} = \{ b^na^1:n \in \mathbb{N} \}$
+				\item[b.] $\mathcal{L} = \{ a^n:n \in \mathbb{N} \}$
+				
+			\end{itemize}
+			
+		\item[ \textbf{Bài 14} ]
+		
+		\begin{itemize}
+		
+			\item[a.] $\forall \mathcal{L}: (\mathcal{L}^+)^+ = \mathcal{L}^+$
+			
+			Theo định nghĩa của bao đóng trên ngôn ngữ, hiển nhiên rằng $\mathcal{L}^+ \subseteq (\mathcal{L}^+)^+ \ \forall \mathcal{L}$.
+			Giả sử $\exists w \in (\mathcal{L}^+)^+$. Vậy phải tồn tại các chuỗi $x_1, x_2, \ldots, x_n \in \mathcal{L}^+$ nào đó sao cho $w = x_1x_2 \ldots x_n$. Với mỗi $x_i \in \mathcal{L}^+$, tồn tại một số $m_i$ nào đó để $x_i \in \mathcal{L}^{m_i}$. Nói cách khác, $w \in \mathcal{L}^{m_1}\mathcal{L}^{m_2} \ldots \mathcal{L}^{m_n} = \mathcal{L}^{m_1 + m_2 + \ldots + m_n} \subseteq \mathcal{L}^+$ (Định nghĩa phép lũy thừa ngôn ngữ).
+			
+			Vì $\mathcal{L}^+ \subseteq (\mathcal{L}^+)^+$ và $(\mathcal{L}^+)^+ \subseteq \mathcal{L}^+$ nên phát biểu ban đầu là \textbf{đúng}. Ngoài ra, phát biểu này dễ dàng mở rộng cho phát biểu sau: $\forall \mathcal{L}: (\mathcal{L}^*)^* = \mathcal{L}^*$
+			
+			\item[b.] $\forall \mathcal{L}: (\mathcal{L}^*)^+ = (\mathcal{L}^+)^*$.
+			
+			Vì $\mathcal{L}: (\mathcal{L}^*)^+$ không chứa chuỗi $\varepsilon$, trong khi $(\mathcal{L}^+)^*$ chứa chuỗi $\varepsilon$, nên phát biểu trên là \textbf{sai}.
+			
+			\item[c.] $\forall \mathcal{L}: \mathcal{L}^* = \mathcal{L}^+ \cup \emptyset$
+			
+			Vì $\mathcal{L}^*$ chứa chuỗi $\varepsilon$, trong khi $\mathcal{L}^+ \cup \emptyset$ không chứa chuỗi $\varepsilon$ ($\emptyset$ là ngôn ngữ rỗng đồng thời không chứa chuỗi $\varepsilon$) nên phát biểu ban đầu là \textbf{sai}.
+			
+			\item[d.]$\forall \mathcal{L}: \mathcal{L^*L} = \mathcal{L^+}$
+			
+			Ta thấy: $\mathcal{L^+} = \mathcal{L}^1 \cup \mathcal{L}^2 \cup \ldots$
+			
+			và $\mathcal{L^*L} = (\mathcal{L}^0 \cup \mathcal{L}^1 \cup \mathcal{L}^2 \cup \ldots)(\mathcal{L})$. Dễ thấy từ đây, các chuỗi thuộc ngôn ngữ $\mathcal{L^*L}$ hình thành bằng cách ghép một chuỗi nào đó thuộc $\mathcal{L}^i$ với chuỗi $\mathcal{L}, i \geq 0$. Theo định nghĩa phép lũy thừa ngôn ngữ, ta nhận được $\mathcal{L}^1 \cup \mathcal{L}^2 \cup \ldots$.
+			
+			Vậy $\mathcal{L^*L}$ và $\mathcal{L^+}$  đều được tạo thành từ $\mathcal{L}^1 \cup \mathcal{L}^2 \cup \ldots$. Vậy, phát biểu ban đầu là \textbf{đúng}.
+			
+			\item[e.] $\forall \mathcal{L}_1, \mathcal{L}_2: (\mathcal{L}_1\mathcal{L}_2)^* = \mathcal{L}_1^*\mathcal{L}_2^*$
+			
+			Giả sử $\mathcal{L}_1=\{a,b\}$, $\mathcal{L}_2=\{c,d\}$. $\mathcal{L}_1\mathcal{L}_2=\{ac, ad, bc, bd\}$. $(\mathcal{L}_1\mathcal{L}_2)^*=\{acad, acbc, \ldots\}$. $\mathcal{L}_1^*=\{\varepsilon, a, b, aa, ab, ba, bb, \ldots\}, \mathcal{L}_2^*=\{\varepsilon, c, d, cc, cd, dc, dd, \ldots\}$.
+			
+			Xét chuỗi $acad \in (\mathcal{L}_1\mathcal{L}_2)^*$. Dễ thấy ta không có cách ghép chuỗi $\mathcal{L}_1^*\mathcal{L}_2^*$ nào để tạo được $acad$ do mọi cách ghép nối đều yêu cầu một chuỗi phải được tạo ra từ cả $\mathcal{L}_1$ và $\mathcal{L}_2$, trong khi không có chuỗi nào thuộc $\mathcal{L}_1^*$ hoặc $\mathcal{L}_2^*$ đáp ứng yêu cầu này.
+			
+			Vì ví dụ phản chứng này, phát biểu ban đầu là \textbf{sai}.
+			
+			\item[f.] $\forall \mathcal{L}_1, \mathcal{L}_2: \mathcal{L}_1^* \cup \mathcal{L}_2^* = (\mathcal{L}_1^* \cup \mathcal{L}_2^*)^*$
+			
+			Đặt $\mathcal{L}_1^* \cup \mathcal{L}_2^* = \mathcal{L}$. Ta có: $\mathcal{L} = \mathcal{L^*}$. Vì chỉ có chiều $\mathcal{L} \subseteq \mathcal{L^*}$ là đúng nên $\mathcal{L} = \mathcal{L^*}$ là sai. Do đó, phát biểu ban đầu cũng phải \textbf{sai}.
+		
+		\end{itemize}
+	
+	\end{itemize}
+	
+\end{document}
