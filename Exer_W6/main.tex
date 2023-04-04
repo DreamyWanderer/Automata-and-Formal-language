@@ -93,6 +93,14 @@
 		
 		\item[ \textbf{Bài 5} ]
 		
+		\begin{itemize}				
+				
+		\end{itemize}
+		
+		\begin{itemize}
+		
+		\end{itemize}
+		
 		\item[ \textbf{Bài 6} ]
 		
 		\begin{itemize}
@@ -133,10 +141,100 @@
 				\bm{ x_2 = \varepsilon + ax_1 }
 				\end{numcases}
 				
-				Thế giá trị $x_2$ vào (5):
+				Áp dụng định lý, ta có: 
 				
 				\begin{align*}
-				\bm{ x_1 = bx_0 + bx_1 + aax_1}
+				\bm{ x_0 = a^*(ax_1) }
+				\end{align*}
+				
+				Thế giá trị $x_0, x_2$ vào (5):
+				
+				\begin{align*}
+				\bm{ x_1 } &= \bm{ ba^*(ax_1) + bx_1 + a(\varepsilon + ax_1) = ba^+x_1 + bx_1 + a\varepsilon + aax_1 } \\
+				&= \bm{ a\varepsilon + (ba^+ + b + aa)x_1  = (ba^+ + b + aa)^*a }
+				\end{align*}
+				
+				Thay $x_1$ vào $x_0$:
+				
+				\begin{align*}
+				\bm{ x_0 = a^+(ba^+ + b + aa)^*a }
+				\end{align*}
+				
+				$x_0$ chính là biểu thức chính quy cần tìm vì $q_0$ là trạng thái bắt đầu.				
+				
+			\item[c.] Hệ phương trình là:
+			
+				\begin{numcases}{}
+				\bm{ x_0 = \varepsilon + ax_1 + bx_3 } \\
+				\bm{ x_1 = bx_0 + ax_2 } \\
+				\bm{ x_2 = (a + b)x_2 } \\
+				\bm{ x_3 = ax_0 + bx_2 }
+				\end{numcases}
+				
+				Theo định lý, ta có:
+				
+				\begin{align*}
+				\bm{ x_2 = \emptyset }
+				\end{align*}
+				
+				Thay $x_2$ vào $x_1$:
+				
+				\begin{align*}
+				\bm{ x_1 = bx_0 }
+				\end{align*}
+				
+				Thay $x_2$ vào $x_3$:
+				
+				\begin{align*}
+				\bm{ x_3 = ax_0 }
+				\end{align*}
+				
+				Thay $x_1, x_3$ vào $x_0$:
+				
+				\begin{align*}
+				\bm{ x_0 } &= \bm{ \varepsilon + abx_0 + bax_0 = \varepsilon + (ab + ba)x_0 = (ab + ba)^* }
+				\end{align*}
+				
+				$x_0$ chính là biểu thức chính quy cần tìm do $q_0$ là trạng thái bắt đầu.
+				
+			\item[d.]
+			
+				\begin{numcases}{}
+				\bm{ x_0 = 0x_0 + 1x_1 }\\
+				\bm{ x_1 = 1x_1 + 0x_2 }\\
+				\bm{ x_2 = 0x_0 + 1x_3 }\\
+				\bm{ x_3 = \varepsilon + 0x_0 + 1x_1 }
+				\end{numcases}
+				
+				Áp dụng định lý:
+				
+				\begin{align*}
+				\bm{ x_0 = 0^*(1x_1) }
+				\end{align*}
+				
+				Thay $x_0$ vào (14):
+				
+				\begin{align*}
+				\bm{ x_3 = \varepsilon + 0^+1x_1 + 1x_1 }
+				\end{align*}
+				
+				Thay $x_3$ vào (13):
+				
+				\begin{align*}
+				\bm{ x_2 = 0^+1x_1 + 1 + 10^+1x_1 + 11x_1 }
+				\end{align*}
+				
+				Thay $x_2$ vào (12):
+				
+				\begin{align*}
+				\bm{ x_1 } &= \bm{ 1x_1 + 00^+1x_1 + 01 + 010^+1x_1 + 011x_1 } \\
+				&= \bm{ (1 + 00^+1 + 010^+1 + 011)x_1 + 01     = (1 + 00^+1 + 010^+1 + 011)^*01 }
+				\end{align*}
+				
+				Thay $x_1$ vào $x_0$:
+				
+				\begin{align*}
+				\bm{ x_0 = 0^*1 (1 + 00^+1 + 010^+1 + 011)^*01 }
 				\end{align*}
 		
 		\end{itemize}
