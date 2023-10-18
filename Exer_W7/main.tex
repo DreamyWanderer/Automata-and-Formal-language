@@ -1,0 +1,148 @@
+\documentclass[12pt, a4paper]{article}
+\usepackage{fancyhdr, url}
+\usepackage{ragged2e}
+\usepackage[pdftex]{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage[vietnamese]{babel}
+
+\usepackage{pgffor}
+\usepackage{ifthen}
+\usepackage{listofitems}
+
+\usepackage{tikz}
+\usetikzlibrary {automata, positioning, arrows}
+
+\usepackage{amsmath, amssymb}
+\usepackage{cases}
+\usepackage{bm}
+
+\newcommand{\fDFA}[3]{
+	\delta_D(\{
+	\foreach[count=\i] \j in {#1} {
+		\ifthenelse{\i < #2}{s_\j, }{s_\j} 
+	}
+	\}, #3)
+}
+
+\newcommand{\GDerivative}[2] {
+	\foreach[count=\i] \j in {#1} {
+		\j
+		\ifthenelse{\i < #2}{ \Rightarrow }{}
+	}
+}
+
+
+\begin{document}
+	
+	\pagenumbering{gobble}
+
+	\begin{titlepage}
+		\centering
+		\large
+		ĐẠI HỌC KHOA HỌC TỰ NHIÊN, ĐẠI HỌC QUỐC GIA TP.HCM\\[.1in]
+		KHOA CÔNG NGHỆ THÔNG TIN\\BỘ MÔN KHOA HỌC MÁY TÍNH\\
+		\vfill
+		\huge AUTOMATA VÀ\\NGÔN NGỮ HÌNH THỨC\\[.1in]
+		\LARGE BÀI TẬP CHƯƠNG 6\\
+		\vfill
+		\RaggedRight
+		\large
+		Sinh viên thực hiện: Nguyễn Thế Hoàng (MSSV: 2012 0090)\\[.1in]
+		Giáo viên phụ trách: Nguyễn Thanh Phương - Lê Ngọc Thành\\[.2in]
+		\Centering
+		BÀI TẬP MÔN HỌC - AUTOMATA VÀ NGÔN NGỮ HÌNH THỨC\\[.1in]
+		HỌC KỲ II - NĂM HỌC 2022 - 2023
+	\end{titlepage}
+	
+	\newpage	
+	
+	\pagenumbering{arabic}
+	
+	\begin{itemize}
+		
+		\item[ \textbf{Bài 1}]
+		
+		\begin{itemize}
+		
+			\item[a.] $S \rightarrow SS \mid aS \mid b$
+			
+			Một dẫn xuất khả dĩ đáp ứng yêu cầu là:
+			
+			$ \GDerivative{S, aS, aaS, aaaS, aaaSS, aaaSSS, aaaSSSS, aaaSSSSS, aaaSSSSSS, aaaSSSSSSS, aaabbbbbbb}{11} $			
+			
+			$\mathcal{L}(\mathcal{G})$ bao gồm các chuỗi chứa tùy ý số lượng kí tự a và b, nhưng không có kí tự a nào đứng sau b, và không được là $\varepsilon$.
+			
+			\item[b.] $S \rightarrow aSaa \mid B, B \rightarrow bbBdd \mid C, C \rightarrow bd$
+			
+			Một dẫn xuất khả dĩ đáp ứng yêu cầu là:
+			
+			$\GDerivative{aSaa, aaSaaaa, a^2Ba^4, a^2bbBdda^4, a^2bbbbBdddda^4, a^2b^4Cd^4a^4, a^2b^5d^5a^4}{7}$
+			
+			$\mathcal{L}(\mathcal{G}) = \{ a^ib^jd^ja^{2i}: i, j \in \mathbb{N}^* \}$
+			
+			\item[f.] $S \rightarrow bSaS \mid aSbS \mid \varepsilon$
+			
+			Một dẫn xuất khả dĩ đáp ứng yêu cầu là:
+			
+			$\GDerivative{bSaS, bbSaSaS, bbaSbSaSaS, bbabSaSbSaSaS, bbabaSbSaSbSaSaS, bbabababaa}{6}$
+			
+			$\mathcal{L}(\mathcal{G})$ bao gồm các chuỗi gồm: tùy ý số lượng kí tự a, b xen kẽ nhau sao cho $|a| = |b|$; hoặc chuỗi $\varepsilon$.
+			
+		\end{itemize}
+		
+		\item[ \textbf{Bài 2} ]
+		
+		\begin{itemize}
+			
+			\item[a.] $\mathcal{L} = \{ a^nx: n \in \mathbb{N} \wedge x \in \{a, b\}^* \wedge |x| = n \}$
+			
+			Tập luật sinh $P$ của văn phạm $\mathcal{G}_{\mathcal{L}}$ là: 
+			
+			$\{
+			S \rightarrow aSX \mid \varepsilon,
+			X \rightarrow a \mid b
+			\}$			
+			
+			\item[b.] $\mathcal{L} = \{ a^nb^na^mb^m: m, n \in \mathbb{N} \}$
+			
+			Tập luật sinh $P$ của văn phạm $\mathcal{G}_{\mathcal{L}}$ là: 
+			
+			$\{
+			A \rightarrow aSbX \mid \varepsilon,
+			S \rightarrow aSb \mid \varepsilon,
+			X \rightarrow aSb \mid \varepsilon
+			\}$	
+			
+			\item[c.] $\mathcal{L} = \{ a^nb^{n + m}b^m: m, n \in \mathbb{N} \}$
+			
+			Tập luật sinh $P$ của văn phạm $\mathcal{G}_{\mathcal{L}}$ là: 
+			
+			$\{
+			A \rightarrow aSbX \mid \varepsilon,
+			S \rightarrow aSb \mid \varepsilon,
+			X \rightarrow bbX \mid \varepsilon
+			\}$
+			
+			\item[g.] $\mathcal{L} = \{ a^nb^mb^{2n + m}: m, n \in \mathbb{Z}^+ \}$
+			
+			Tập luật sinh $P$ của văn phạm $\mathcal{G}_{\mathcal{L}}$ là: 
+			
+			$\{
+			A \rightarrow aSbbX,
+			S \rightarrow aSbb \mid \varepsilon,
+			X \rightarrow bb \mid \varepsilon
+			\}$
+			
+			\item[h.] $\mathcal{L} = \{ w \in \{a, b\}^*: |w|_a = 2|w|_b \}$
+			
+			Tập luật sinh $P$ của văn phạm $\mathcal{G}_{\mathcal{L}}$ là: 
+			
+			$\{
+			S \rightarrow SbSaSaS \mid SaSbSaS \mid SaSaSbS \mid \varepsilon
+			\}$
+			
+		\end{itemize}
+			
+	\end{itemize}
+	
+\end{document}
